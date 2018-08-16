@@ -54,6 +54,8 @@ void cpu_verushash::solve_verus(CBlockHeader &bh,
 	// hashrate and sharerate are valid, solutionrate will equal sharerate
 	for (int64_t i = 0; i < VERUSHASHES_PER_SOLVE; i++)
 	{
+		if (cancelf()) return;
+		
 		*(vh.ExtraI64Ptr()) = i;
 		vh.ExtraHash((unsigned char *)&curHash);
 		if (UintToArith256(curHash) > target)
