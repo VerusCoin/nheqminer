@@ -10,6 +10,7 @@ build:linux:
   stage: build
   before_script:
   script:
+  - apt update && apt install -y cmake
   - cd cpu_xenoncat/asm_linux/
   - sh assemble.sh
   - cd ../../../
