@@ -10,7 +10,7 @@ build:linux:
   stage: build
   before_script:
   script:
-  - cd nheqminer/cpu_xenoncat/asm_linux/
+  - cd cpu_xenoncat/asm_linux/
   - sh assemble.sh
   - cd ../../../
   - mkdir build && cd build
