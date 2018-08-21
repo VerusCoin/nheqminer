@@ -1,0 +1,18 @@
+stages:
+- build
+variables:
+  VERSION: 0.1.0
+
+build:linux:
+  tags: ["High Sierra"]
+  stage: assemble
+  before_script:
+  script:
+  - cd nheqminer/cpu_xenoncat/asm_linux/
+  - sh assemble.sh
+  - cd ../../../
+  - mkdir build && cd build
+  - cmake ../nheqminer
+  - make -j $(nproc)
+
+
