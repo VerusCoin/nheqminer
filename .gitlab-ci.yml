@@ -10,12 +10,18 @@ build:linux:
   stage: build
   before_script:
   script:
-  - apt update && apt install -y cmake libboost-all-dev
+  - mkdir build 
+  - cd build 
+  - cmake -DUSE_CUDA_DJEZO=0 -DUSE_CPU_XENONCAT=0 .. 
+  - make -j $(nproc) 
   - cd cpu_xenoncat/asm_linux/
   - sh assemble.sh
   - cd ../../../
   - mkdir build && cd build
   - cmake ../nheqminer
   - make -j $(nproc)
+  artifacts:
+    paths: ["build"]
+    expire_in: 1 week
 
 
