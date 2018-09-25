@@ -10,13 +10,12 @@ build:linux:
   stage: build
   before_script:
   script:
-  - unset CC
   - mkdir build 
   - cd build 
   - cmake -DUSE_CUDA_DJEZO=0 -DUSE_CPU_XENONCAT=0 .. 
   - make -j $(nproc) 
   artifacts:
-    paths: ["build"]
+    paths: ["build/nheqminer"]
     expire_in: 1 week
 
 
