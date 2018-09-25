@@ -7,10 +7,10 @@ build:linux:
   image: asherd/veruscoin-cross-compiler:pool
   variables:
     DOCKER_DRIVER: overlay2
-
+    CXX: usr/bin/g++-8 \
+    CC: usr/bin/gcc+-8
   stage: build
   before_script:
-  - unset CC; unset CXX
   script:
   - mkdir build && cd build
   - cmake -DUSE_CUDA_DJEZO=0 -DUSE_CPU_XENONCAT=0 .. 
