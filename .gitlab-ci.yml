@@ -12,6 +12,7 @@ build:linux:
   stage: build
   before_script:
   script:
+  - apt update && apt install -y gcc-8 g++-8
   - mkdir build && cd build
   - cmake -DUSE_CUDA_DJEZO=0 -DUSE_CPU_XENONCAT=0 .. 
   - make -j$(nproc) 
