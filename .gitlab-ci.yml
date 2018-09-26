@@ -7,8 +7,6 @@ build:linux:
   image: asherd/veruscoin-cross-compiler:pool
   variables:
     DOCKER_DRIVER: overlay2
-    CXX: /usr/bin/g++-8 
-    CC: /usr/bin/gcc-8
   stage: build
   before_script:
   script:
