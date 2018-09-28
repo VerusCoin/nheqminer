@@ -50,7 +50,9 @@ if(CMAKE_COMPILER_IS_GNUCXX)
 #    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -m64 -msse2")
 #    # optimizations
 #    add_definitions(-O2)
+
 endif()
+
 # MACOS
 if(APPLE)
     if(CMAKE_COMPILER_IS_GNUCXX)
@@ -63,7 +65,7 @@ if(APPLE)
     endif()
 endif(APPLE)
 # Common
-include_directories(${nheqminer_SOURCE_DIR}/nheqminer ${nheqminer_SOURCE_DIR}/nheqminer/primitives/)
+include_directories(${nheqminer_SOURCE_DIR}/nheqminer)
 
 # BOOST
 #find_package(Threads REQUIRED COMPONENTS)
