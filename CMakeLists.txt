@@ -57,7 +57,7 @@ if(APPLE)
         # use native cpu features
         set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -m64 -msse4 -msse4.1 -msse4.2 -mssse3 -mavx -maes -fPIC")
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -m64 -fPIC")
-        include_directories(/usr/include)
+        include_directories(/usr/include/machine)
         # optimizations
         add_definitions(-O2)
     endif()
