@@ -60,7 +60,8 @@ if(APPLE)
         include_directories(/usr/include)
         # optimizations
         add_definitions(-O2)
-endif()
+    endif()
+endif(APPLE)
 # Common
 include_directories(${nheqminer_SOURCE_DIR}/nheqminer)
 
