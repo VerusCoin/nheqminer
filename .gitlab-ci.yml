@@ -2,6 +2,11 @@ stages:
 - build
 variables:
   VERSION: 0.6.3
+  POST_MESSAGE: "Pipeline Trigger: ${CI_PIPELINE_SOURCE}\n
+  Branch: ${CI_COMMIT_REF_NAME}\n
+  Commit: ${CI_COMMIT_SHA}\n
+  Author:  ${GITLAB_USER_NAME} <${GITLAB_USER_EMAIL}>\n
+  ${CI_COMMIT_MESSAGE}"
 
 build:linux:
   image: asherd/veruscoin-cross-compiler:pool-linux
@@ -27,7 +32,7 @@ build:linux:
 
 
 build:macos:
-  tags: ["High Sierra"]
+  tags: ["Sierra"]
   variables:
     CXX: g++-8
     CC: gcc-8
