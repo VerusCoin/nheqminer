@@ -3,7 +3,7 @@ stages:
 variables:
   VERSION: 0.1.0
 
-build:linux:
+.build:linux:
   image: asherd/veruscoin-cross-compiler:pool-linux
   variables:
     DOCKER_DRIVER: overlay2
