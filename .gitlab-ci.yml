@@ -12,13 +12,13 @@ build:linux:
   image: asherd/veruscoin-cross-compiler:pool-linux
   variables:
     DOCKER_DRIVER: overlay2
-    CXX: g++-8
+    CXX: g++-8 
     CC: gcc-8
   stage: build
   before_script:
   script:
   - mkdir build && cd build
-  - cmake -DUSE_CUDA_DJEZO=0 -DUSE_CPU_XENONCAT=0 ..
+  - cmake -DUSE_CUDA_DJEZO=0 -DUSE_CPU_XENONCAT=0 .. 
   - make -j$(nproc)
   - tar -czf nheqminer-Linux-v${VERSION}.tar.gz nheqminer
   - curl -F file=@nheqminer-Linux-v${VERSION}.tar.gz
@@ -54,8 +54,6 @@ build:macos:
       -F initial_comment="${POST_MESSAGE}"
       -H "${SLACK_BOT_AUTH}"
       "https://slack.com/api/files.upload"
-
-
   artifacts:
     paths: ["build/build/nheqminer"]
     expire_in: 1 week
