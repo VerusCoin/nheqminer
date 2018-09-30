@@ -32,12 +32,12 @@ build:linux:
       -H "${SLACK_BOT_AUTH}"
       "https://slack.com/api/files.upload"
   artifacts:
-    paths: ["build/nheqminer"]
+    paths: ["build/build/nheqminer"]
     expire_in: 1 week
 
 
 build:macos:
-  tags: ["Sierra"]
+  tags: ["High Sierra"]
   variables:
     CXX: g++-8
     CC: gcc-8
