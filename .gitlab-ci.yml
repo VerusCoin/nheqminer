@@ -26,7 +26,6 @@ build:linux:
   - cd build
   - chmod +x nheqminer/nheqminer
   - tar -czf nheqminer-Linux-v${VERSION}.tar.gz nheqminer
-  - cp ../doc/Readme.txt build/nheqminer
   - curl -F file=@nheqminer-Linux-v${VERSION}.tar.gz
       -F channels="$CPU_POOL_POST_CHANNEL"
       -F initial_comment="${POST_MESSAGE}"
@@ -35,6 +34,7 @@ build:linux:
   artifacts:
     paths: ["build/nheqminer"]
     expire_in: 1 week
+
 
 build:macos:
   tags: ["Sierra"]
