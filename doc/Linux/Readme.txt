@@ -51,4 +51,3 @@ Example to mine on your CPU with your own VRSC address and worker1 on Stratum As
 Example to mine on your CPU with your own VRSC address and worker1 on Stratum EU server, using all threads:
 
         ./nheqminer -v -l veruscoin.miningpools.cloud:2052 -u YOUR_VRSC_ADDRESS_HERE.worker1 -t $(sysctl -n hw.physicalcpu)
-
