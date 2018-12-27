@@ -20,8 +20,10 @@
 #ifndef INCLUDE_VERUS_CLHASH_H
 #define INCLUDE_VERUS_CLHASH_H
 
+
 #ifndef _WIN32
 #include <cpuid.h>
+#include <x86intrin.h>
 #else
 #include <intrin.h>
 #endif // !WIN32
