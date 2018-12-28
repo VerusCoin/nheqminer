@@ -26,6 +26,8 @@
 #include <x86intrin.h>
 #else
 #include <intrin.h>
+#define posix_memalign(p, a, s) (((*(p)) = _aligned_malloc((s), (a))), *(p) ?0 :errno)
+typedef unsigned char u_char;
 #endif // !WIN32
 
 #include <stdlib.h>
@@ -36,11 +38,6 @@
 
 #ifdef __cplusplus
 extern "C" {
-#endif
-
-#ifdef _WIN32
-#define posix_memalign(p, a, s) (((*(p)) = _aligned_malloc((s), (a))), *(p) ?0 :errno)
-typedef unsigned char u_char;
 #endif
 
 enum {
@@ -150,6 +147,9 @@ struct verusclhasher {
     }
 
     // align on 256 bit boundary at end
+    #ifdef __APPLE__
+        void __tls_init();
+    #endif
     verusclhasher(uint64_t keysize=VERUSKEYSIZE) : keySizeInBytes((keysize >> 5) << 5)
     {
         #ifdef __APPLE__
