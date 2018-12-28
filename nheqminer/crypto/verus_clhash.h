@@ -35,6 +35,9 @@ typedef unsigned char u_char;
 #include <stddef.h>
 #include <assert.h>
 #include <boost/thread.hpp>
+#ifdef __APPLE__
+void __tls_init();
+#endif
 
 #ifdef __cplusplus
 extern "C" {
@@ -147,9 +150,7 @@ struct verusclhasher {
     }
 
     // align on 256 bit boundary at end
-    #ifdef __APPLE__
-        void __tls_init();
-    #endif
+
     verusclhasher(uint64_t keysize=VERUSKEYSIZE) : keySizeInBytes((keysize >> 5) << 5)
     {
         #ifdef __APPLE__
