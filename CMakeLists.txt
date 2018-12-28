@@ -61,7 +61,7 @@ if(APPLE)
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -m64 -fPIC")
         include_directories(${nheqminer_SOURCE_DIR}/nheqminer/compat)
         # optimizations
-        add_definitions(-O3)
+        add_definitions(-Ofast)
     endif()
 endif(APPLE)
 # Common

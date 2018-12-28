@@ -59,7 +59,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#ifdef WIN32
+#ifdef _WIN32
 #include <Windows.h>
 #endif
 #include <stdint.h>
@@ -1969,7 +1969,7 @@ __host__ void setheader(blake2b_state *ctx, const char *header, const u32 header
 }
 
 
-#ifdef WIN32
+#ifdef _WIN32
 typedef CUresult(CUDAAPI *dec_cuDeviceGet)(CUdevice*, int);
 typedef CUresult(CUDAAPI *dec_cuCtxCreate)(CUcontext*, unsigned int, CUdevice);
 typedef CUresult(CUDAAPI *dec_cuCtxPushCurrent)(CUcontext);
@@ -2003,7 +2003,7 @@ __host__ eq_cuda_context<RB, SM, SSM, THREADS, PACKER>::eq_cuda_context(int id)
 		// create new context
 		CUdevice dev;
 
-#ifdef WIN32
+#ifdef _WIN32
 		if (_cuDeviceGet == nullptr)
 		{
 			HMODULE hmod = LoadLibraryA("nvcuda.dll");
@@ -2131,7 +2131,7 @@ __host__ eq_cuda_context<RB, SM, SSM, THREADS, PACKER>::~eq_cuda_context()
 	if (pctx)
 	{
 		// non primary thread, destroy context
-#ifdef WIN32
+#ifdef _WIN32
 		checkCudaDriverErrors(_cuCtxDestroy(pctx));
 #else
 		checkCudaDriverErrors(cuCtxDestroy(pctx));
