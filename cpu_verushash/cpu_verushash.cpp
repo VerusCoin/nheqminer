@@ -54,7 +54,9 @@ void cpu_verushash::solve_verus(CBlockHeader &bh,
 	CVerusHash &vh = vhw.GetState();
 	uint256 curHash;
 	std::vector<unsigned char> solution = std::vector<unsigned char>(1344);
+	solution[0] = VERUSHHASH_SOLUTION_VERSION; // earliest VerusHash 2.0 solution version
 	bh.nSolution = solution;
+
 
 	// prepare the hash state
 	vhw.Reset();
