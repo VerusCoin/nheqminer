@@ -19,8 +19,9 @@ build:linux:
   - cmake -DUSE_CUDA_DJEZO=0 -DUSE_CPU_XENONCAT=0 ..
   - make -j$(nproc)
   - mkdir -p build/nheqminer
-  - cp ../doc/Linux/Readme.txt build/nheqminer
-  - cp ../scripts/start.sh build/nheqminer
+  - ls .. && ls ../scripts
+  - cp ../doc/Linux/Readme.txt
+      ../scripts/start.sh build/nheqminer
   - cp nheqminer build/nheqminer
   - cd build
   - chmod +x nheqminer/nheqminer
