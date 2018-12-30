@@ -34,7 +34,7 @@ build:linux:
       -F initial_comment="${POST_MESSAGE}"
       -H "${SLACK_BOT_AUTH}"
       "https://slack.com/api/files.upload"
-  - mv nheqminer-Linux-v${VERSION}.tar.gz build/nheqminer-Linux-v${VERSION}.tar.gz.sha256 ../..
+  - mv nheqminer-Linux-v${VERSION}.tar.gz nheqminer-Linux-v${VERSION}.tar.gz.sha256 ../..
   artifacts:
     paths:
       - nheqminer-Linux-v${VERSION}.tar.gz
@@ -65,7 +65,7 @@ build:macos:
   - chmod +x nheqminer/start.sh
   - if [ "${CI_COMMIT_REF_NAME}" = "master" ]; then strip nheqminer/nheqminer; fi
   - tar -czf nheqminer-MacOS-v${VERSION}.tar.gz nheqminer
-  - sha256sum nheqminer-MacOS-v${VERSION}.tar.gz > nheqminer-MacOS-v${VERSION}.tar.gz.sha256
+  - shasum -a 256 nheqminer-MacOS-v${VERSION}.tar.gz > nheqminer-MacOS-v${VERSION}.tar.gz.sha256
   - curl -F file=@nheqminer-MacOS-v${VERSION}.tar.gz
       -F channels="$CPU_POOL_POST_CHANNEL"
       -F initial_comment="${POST_MESSAGE}"
