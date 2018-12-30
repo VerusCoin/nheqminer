@@ -8,6 +8,7 @@ cd ~/Downloads/nheqminer
 Now you can run the nheqminer by running:
  ./nheqminer [Parameters]
 
+
 Parameters:
         -h              Print this help and quit
         -l [location]   Stratum server:port
@@ -42,4 +43,6 @@ Example to run benchmark on your CPU:
 
 Example to mine on your CPU with your own VRSC address and worker1 on Stratum USA server:
 
-        ./nheqminer -v -l us-veruscoin.miningpools.cloud:2052 -u YOUR_VRSC_ADDRESS_HERE.worker1
+        ./nheqminer -v -l poolhost:port -u YourPublicVerusCoinAddress.newuser -p x -t 4
+
+Open and edit the start.sh script to save your preferred configuration

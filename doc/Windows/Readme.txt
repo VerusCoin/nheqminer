@@ -44,3 +44,5 @@ Example to mine on your CPU with your own VRSC address and worker1 on Stratum US
 
         nheqminer -v -l poolhost:port -u YourPublicVerusCoinAddress.newuser -p x -t 4
 
+Open and edit the start.bat script to save your preferred configuration
+
