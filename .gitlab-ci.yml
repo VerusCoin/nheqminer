@@ -20,18 +20,24 @@ build:linux:
   - make -j$(nproc)
   - mkdir -p build/nheqminer
   - cp ../doc/Linux/Readme.txt build/nheqminer
+  - cp ../scripts/start.sh build/nheqminer
   - cp nheqminer build/nheqminer
   - cd build
   - chmod +x nheqminer/nheqminer
+  - chmod +x nheqminer/start.sh
   - if [ "${CI_COMMIT_REF_NAME}" = "master" ]; then strip -g nheqminer/nheqminer; fi
   - tar -czf nheqminer-Linux-v${VERSION}.tar.gz nheqminer
+  - sha256sum nheqminer-Linux-v${VERSION}.tar.gz > nheqminer-Linux-v${VERSION}.tar.gz.sha256
   - curl -F file=@nheqminer-Linux-v${VERSION}.tar.gz
       -F channels="$CPU_POOL_POST_CHANNEL"
       -F initial_comment="${POST_MESSAGE}"
       -H "${SLACK_BOT_AUTH}"
       "https://slack.com/api/files.upload"
   artifacts:
-    paths: ["build/build/nheqminer"]
+    paths:
+      - build/nheqminer-Linux-v${VERSION}.tar.gz
+      - build/nheqminer-Linux-v${VERSION}.tar.gz.sha256
+
     expire_in: 1 week
 
 
@@ -47,19 +53,24 @@ build:macos:
   - make -j$(sysctl -n hw.physicalcpu)
   - mkdir -p build/nheqminer
   - cp ../doc/Mac/Readme.txt build/nheqminer
+  - cp ../scripts/start.sh build/nheqminer
   - cp nheqminer build/nheqminer
   - cd build
   - DYLIBS=`otool -L nheqminer/nheqminer | grep "/usr/local" | awk -F' ' '{ print $1 }'`
   - for dylib in $DYLIBS; do cp -rf $dylib Nheqminer/; done
   - for dylib in $DYLIBS; do install_name_tool -change $dylib @executable_path/`basename $dylib` nheqminer/nheqminer; done;
   - chmod +x nheqminer/nheqminer
+  - chmod +x nheqminer/start.sh
   - if [ "${CI_COMMIT_REF_NAME}" = "master" ]; then strip nheqminer/nheqminer; fi
   - tar -czf nheqminer-MacOS-v${VERSION}.tar.gz nheqminer
+  - sha256sum nheqminer-MacOS-v${VERSION}.tar.gz > nheqminer-MacOS-v${VERSION}.tar.gz.sha256
   - curl -F file=@nheqminer-MacOS-v${VERSION}.tar.gz
       -F channels="$CPU_POOL_POST_CHANNEL"
       -F initial_comment="${POST_MESSAGE}"
       -H "${SLACK_BOT_AUTH}"
       "https://slack.com/api/files.upload"
   artifacts:
-    paths: ["build/build/nheqminer"]
+    paths:
+    - build/nheqminer-MacOS-v${VERSION}.tar.gz
+    - build/nheqminer-MacOS-v${VERSION}.tar.gz.sha256
     expire_in: 1 week

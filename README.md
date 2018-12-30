@@ -84,15 +84,9 @@ Example to run benchmark on your CPU:
 
 Example to mine on your CPU with your own VRSC address and worker1 on Stratum USA server:
 
-        ./nheqminer -v -l us-veruscoin.miningpools.cloud:2052 -u YOUR_VRSC_ADDRESS_HERE.worker1
+        ./nheqminer -v -l poolhost:port -u YourPublicVerusCoinAddress.newuser -p x -t 4
 
-Example to mine on your CPU with your own VRSC address and worker1 on Stratum Asia server
 
-        ./nheqminer -v -l asia-veruscoin.miningpools.cloud:2052 -u YOUR_VRSC_ADDRESS_HERE.worker1 
-
-Example to mine on your CPU with your own VRSC address and worker1 on Stratum EU server using 2 threads:
-
-        ./nheqminer -v -l veruscoin.miningpools.cloud:2052 -u YOUR_VRSC_ADDRESS_HERE.worker1 -t 2
 To mine with all threads use:
  
  `-t $(nproc)`
@@ -108,12 +102,4 @@ Example to run benchmark on your CPU:
 
 Example to mine on your CPU with your own VRSC address and worker1 on Stratum USA server:
 
-        nheqminer -v -l us-veruscoin.miningpools.cloud:2052 -u YOUR_VRSC_ADDRESS_HERE.worker1
-
-Example to mine on your CPU with your own VRSC address and worker1 on Stratum Asia server, using 6 threads:
-
-        nheqminer -v -l asia-veruscoin.miningpools.cloud:2052 -u YOUR_VRSC_ADDRESS_HERE.worker1 -t 6
-
-Example to mine on your CPU with your own VRSC address and worker1 on Stratum EU server, all threads
-
-        nheqminer -v -l veruscoin.miningpools.cloud:2052 -u YOUR_VRSC_ADDRESS_HERE.worker1 -t %NUMBER_OF_PROCESSORS%
+        nheqminer -v -l poolhost:port -u YourPublicVerusCoinAddress.newuser -p x -t 4
