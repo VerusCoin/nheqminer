@@ -425,6 +425,15 @@ void haraka512_zero(unsigned char *out, const unsigned char *in) {
   TRUNCSTORE(out, s[0], s[1], s[2], s[3]);
 }
 
+#define MIX4_LAST(s0, s1, s2, s3) \
+  tmp  = _mm_unpacklo_epi32(s0, s1); \
+  s1 = _mm_unpacklo_epi32(s2, s3); \
+  s2 = _mm_unpackhi_epi32(s1, tmp); 
+
+#define AES4_LAST(s0, s1, s2, s3, rci) \
+  s2 = _mm_aesenc_si128(s2, rc[rci + 2]); \
+  s2 = _mm_aesenc_si128(s2, rc[rci + 6]); 
+
 void haraka512_keyed(unsigned char *out, const unsigned char *in, const u128 *rc) {
   u128 s[4], tmp;
 
