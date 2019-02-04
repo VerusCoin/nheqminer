@@ -443,17 +443,16 @@ void haraka512_keyed(unsigned char *out, const unsigned char *in, const u128 *rc
   MIX4(s[0], s[1], s[2], s[3]);
 
   AES4(s[0], s[1], s[2], s[3], 24);
-  MIX4(s[0], s[1], s[2], s[3]);
+  MIX4_LAST(s[0], s[1], s[2], s[3]);
 
-  AES4(s[0], s[1], s[2], s[3], 32);
-  MIX4(s[0], s[1], s[2], s[3]);
+  AES4_LAST(s[0], s[1], s[2], s[3], 32);
 
-  s[0] = _mm_xor_si128(s[0], LOAD(in));
-  s[1] = _mm_xor_si128(s[1], LOAD(in + 16));
-  s[2] = _mm_xor_si128(s[2], LOAD(in + 32));
-  s[3] = _mm_xor_si128(s[3], LOAD(in + 48));
 
-  TRUNCSTORE(out, s[0], s[1], s[2], s[3]);
+ // s[0] = _mm_xor_si128(s[0], LOAD(in));
+ // s[1] = _mm_xor_si128(s[1], LOAD(in + 16));
+ // s[2] = _mm_xor_si128(s[2], LOAD(in + 32));
+ // s[3] = _mm_xor_si128(s[0], LOAD(in + 48));
+  ((uint32_t*)&out[0])[7] = ((uint32_t*)&s[0])[10] ^ ((uint32_t*)&in[52])[0];
 }
 
 void haraka512_4x(unsigned char *out, const unsigned char *in) {
