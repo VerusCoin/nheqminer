@@ -1,13 +1,13 @@
 project(nheqminer)
 cmake_minimum_required(VERSION 3.5)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall") 
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 ") # -Wall
 ## Enable solvers here
 #### older slower
 option(USE_CPU_TROMP "USE CPU_TROMP" OFF)
 option(USE_CUDA_TROMP "USE CUDA_TROMP" OFF)
 #### faster
-option(USE_CPU_XENONCAT "USE CPU_XENONCAT" ON)
+option(USE_CPU_XENONCAT "USE CPU_XENONCAT" OFF)
 option(USE_CUDA_DJEZO "USE CUDA_DJEZO" OFF)
 option(USE_CPU_VERUSHASH "USE CPU_VERUSHASH" ON)
 
@@ -50,18 +50,18 @@ endif()
 if(APPLE)
     if(CMAKE_COMPILER_IS_GNUCXX)
         # use native cpu features
-        set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -m64 -mpclmul -mssse3 -msse4 -msse4.1 -mavx -msse4.2 -maes -fomit-frame-pointer -fPIC")
-        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -m64 -mpclmul -mssse3 -msse4 -msse4.1 -mavx -msse4.2 -maes -fomit-frame-pointer -fPIC")
+        set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -m64 -mpclmul -mssse3 -msse4 -msse4.1 -mavx -msse4.2 -maes -fomit-frame-pointer -fPIC -g" )
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -m64 -mpclmul -mssse3 -msse4 -msse4.1 -mavx -msse4.2 -maes -fomit-frame-pointer -fPIC -g")
         include_directories(${nheqminer_SOURCE_DIR}/nheqminer/compat)
         # optimizations
         add_definitions(-O2)
     endif()
 endif(APPLE)
 
-set_source_files_properties(${nheqminer_SOURCE_DIR}/nheqminer/crypto/verus_clhash_portable.cpp PROPERTIES COMPILE_FLAGS "-mno-sse4 -mno-sse4.1 -mno-sse4.2")
-set_source_files_properties(${nheqminer_SOURCE_DIR}/nheqminer/crypto/haraka_portable.c PROPERTIES COMPILE_FLAGS "-mno-sse4 -mno-sse4.1 -mno-sse4.2")
-set_source_files_properties(${nheqminer_SOURCE_DIR}/nheqminer/crypto/verus_clhash.cpp PROPERTIES COMPILE_FLAGS "-mavx")
-set_source_files_properties(${nheqminer_SOURCE_DIR}/nheqminer/crypto/haraka.c PROPERTIES COMPILE_FLAGS "-mavx")
+set_source_files_properties(${nheqminer_SOURCE_DIR}/nheqminer/crypto/verus_clhash_portable.cpp PROPERTIES COMPILE_FLAGS "-mno-sse4 -mno-sse4.1 -mno-sse4.2 -g")
+set_source_files_properties(${nheqminer_SOURCE_DIR}/nheqminer/crypto/haraka_portable.c PROPERTIES COMPILE_FLAGS "-mno-sse4 -mno-sse4.1 -mno-sse4.2 -g")
+set_source_files_properties(${nheqminer_SOURCE_DIR}/nheqminer/crypto/verus_clhash.cpp PROPERTIES COMPILE_FLAGS "-mavx -g")
+set_source_files_properties(${nheqminer_SOURCE_DIR}/nheqminer/crypto/haraka.c PROPERTIES COMPILE_FLAGS "-mavx -g")
 
 # Common
 include_directories(${nheqminer_SOURCE_DIR}/nheqminer)
