@@ -41,8 +41,8 @@ build:linux:
     expire_in: 1 week
 
 
-.build:macos:
-  tags: ["High Sierra"]
+build:macos:
+  tags: ["Mojave"]
   variables:
     CXX: g++-8
     CC: gcc-8
