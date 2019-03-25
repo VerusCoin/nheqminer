@@ -39,8 +39,8 @@ endif()
 # LINUX
 if(CMAKE_COMPILER_IS_GNUCXX)
     # use native cpu features
-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -march=x86-64 -mpclmul -msse2 -msse3 -mssse3 -maes -g -fomit-frame-pointer -fPIC")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=x86-64 -mpclmul -msse2 -msse3 -mssse3 -maes -g -fomit-frame-pointer -fPIC")
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -march=x86-64 -mpclmul -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -maes -g -fomit-frame-pointer -fPIC")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=x86-64 -mpclmul -msse2 -msse3 -mssse3 -msse4 -msse4.1 -msse4.2 -maes -g -fomit-frame-pointer -fPIC")
 
     # optimizations
     add_definitions(-O2)
@@ -51,13 +51,19 @@ endif()
 if(APPLE)
     if(CMAKE_COMPILER_IS_GNUCXX)
         # use native cpu features
-        set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -m64 -mpclmul -msse4 -msse4.1 -msse4.2 -mssse3 -mavx -maes -fomit-frame-pointer -fPIC")
-        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -m64 -mpclmul -msse4 -msse4.1 -msse4.2 -mssse3 -mavx -maes -fomit-frame-pointer -fPIC")
+        set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -m64 -mpclmul -mssse3 -msse4 -msse4.1 -mavx -msse4.2 -maes -fomit-frame-pointer -fPIC")
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -m64 -mpclmul -mssse3 -msse4 -msse4.1 -mavx -msse4.2 -maes -fomit-frame-pointer -fPIC")
         include_directories(${nheqminer_SOURCE_DIR}/nheqminer/compat)
         # optimizations
-        add_definitions(-O0)
+        add_definitions(-O2)
     endif()
 endif(APPLE)
+
+set_source_files_properties(${nheqminer_SOURCE_DIR}/nheqminer/crypto/verus_clhash_portable.cpp PROPERTIES COMPILE_FLAGS "-mno-sse4 -mno-sse4.1 -mno-sse4.2")
+set_source_files_properties(${nheqminer_SOURCE_DIR}/nheqminer/crypto/haraka_portable.c PROPERTIES COMPILE_FLAGS "-mno-sse4 -mno-sse4.1 -mno-sse4.2")
+set_source_files_properties(${nheqminer_SOURCE_DIR}/nheqminer/crypto/verus_clhash.cpp PROPERTIES COMPILE_FLAGS "-mavx")
+set_source_files_properties(${nheqminer_SOURCE_DIR}/nheqminer/crypto/haraka.c PROPERTIES COMPILE_FLAGS "-mavx")
+
 # Common
 include_directories(${nheqminer_SOURCE_DIR}/nheqminer)
 
