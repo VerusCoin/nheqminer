@@ -1,11 +1,10 @@
 stages:
 - build
 variables:
-  VERSION: 0.7.1
+  VERSION: 0.7.2
   POST_MESSAGE: "Pipeline Trigger: ${CI_PIPELINE_SOURCE}\n
   Branch: ${CI_COMMIT_REF_NAME}\n
   Commit: ${CI_COMMIT_SHA}\n
-  Author:  ${GITLAB_USER_NAME} <${GITLAB_USER_EMAIL}>\n
   ${CI_COMMIT_MESSAGE}"
 
 build:linux:
@@ -42,7 +41,7 @@ build:linux:
     expire_in: 1 week
 
 
-build:macos:
+.build:macos:
   tags: ["High Sierra"]
   variables:
     CXX: g++-8
