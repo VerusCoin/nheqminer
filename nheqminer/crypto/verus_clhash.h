@@ -120,13 +120,15 @@ inline bool IsCPUVerusOptimized()
     if (__cpuverusoptimized & 0x80)
     {
         #ifdef _MSC_VER
-        int bit_AVX = 0x10000000;
-        int bit_AES = 0x02000000;
-        int bit_PCLMUL = 0x00000002;
+        #define bit_AVX		(1 << 28)
+        #define bit_AES		(1 << 25)
+        #define bit_PCLMUL  (1 << 1)
+        // https://insufficientlycomplicated.wordpress.com/2011/11/07/detecting-intel-advanced-vector-extensions-avx-in-visual-studio/
+        // bool cpuAVXSuport = cpuInfo[2] & (1 << 28) || false;
 
-        int cpu_info[4]; // Value of the four registers EAX, EBX, ECX, and EDX, each 32-bit integers
-	__cpuid(cpu_info, 0);
-        __cpuverusoptimized = ((cpu_info[3] & (bit_AVX | bit_AES | bit_PCLMUL)) == (bit_AVX | bit_AES | bit_PCLMUL));
+        int cpuInfo[4];
+		__cpuid(cpuInfo, 1);
+        __cpuverusoptimized = ((cpuInfo[2] & (bit_AVX | bit_AES | bit_PCLMUL)) == (bit_AVX | bit_AES | bit_PCLMUL));
 
         #else
         unsigned int eax,ebx,ecx,edx;
