@@ -119,7 +119,7 @@ inline bool IsCPUVerusOptimized()
     #else
     if (__cpuverusoptimized & 0x80)
     {
-        #ifdef _WIN32
+        #ifdef _MSC_VER
         int bit_AVX = 0x10000000;
         int bit_AES = 0x02000000;
         int bit_PCLMUL = 0x00000002;

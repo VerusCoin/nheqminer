@@ -199,7 +199,7 @@ __m128i _mm_loadl_epi64(__m128i *a)
     }
 }
 
-#ifdef _WIN32
+#ifdef _MSC_VER
     static __forceinline void haraka512_keyed_local(unsigned char *out, const unsigned char *in, const u128 *rc) {
 #else
     static inline __attribute__((always_inline)) void haraka512_keyed_local(unsigned char *out, const unsigned char *in, const u128 *rc) {
