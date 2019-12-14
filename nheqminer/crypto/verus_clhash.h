@@ -30,7 +30,7 @@
 #ifdef _WIN32
 #undef __cpuid
 #include <intrin.h>
-#endif
+#else
 
 #if defined(__arm__)  || defined(__aarch64__)
 #include "crypto/SSE2NEON.h"
@@ -40,6 +40,7 @@
 #include <cpuid.h>
 #include <x86intrin.h>
 #endif // !WIN32
+#endif
 
 #include <boost/thread.hpp>
 #include "tinyformat.h"
