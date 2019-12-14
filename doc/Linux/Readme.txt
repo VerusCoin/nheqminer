@@ -1,4 +1,4 @@
-VerusCoin nheqminer v0.7.2
+VerusCoin nheqminer v0.8.0
 Using VerusHash v2.0
 
 This software needs to be run on a terminal.
