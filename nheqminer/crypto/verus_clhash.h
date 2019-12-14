@@ -119,6 +119,16 @@ inline bool IsCPUVerusOptimized()
     #else
     if (__cpuverusoptimized & 0x80)
     {
+        #ifdef _WIN32
+        int bit_AVX = 0x10000000;
+        int bit_AES = 0x02000000;
+        int bit_PCLMUL = 0x00000002;
+
+        int cpu_info[4]; // Value of the four registers EAX, EBX, ECX, and EDX, each 32-bit integers
+	__cpuid(cpu_info, 0);
+        __cpuverusoptimized = ((cpu_info[3] & (bit_AVX | bit_AES | bit_PCLMUL)) == (bit_AVX | bit_AES | bit_PCLMUL));
+
+        #else
         unsigned int eax,ebx,ecx,edx;
         if (!__get_cpuid(1,&eax,&ebx,&ecx,&edx))
         {
@@ -128,6 +138,7 @@ inline bool IsCPUVerusOptimized()
         {
             __cpuverusoptimized = ((ecx & (bit_AVX | bit_AES | bit_PCLMUL)) == (bit_AVX | bit_AES | bit_PCLMUL));
         }
+        #endif
     }
     #endif
     return __cpuverusoptimized;
